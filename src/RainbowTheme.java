@@ -34,7 +34,7 @@ public class RainbowTheme implements BoardStrategy {
 	 * Get the background image.
 	 */
 	@Override
-	public Image setBackgroundImage() { return img; }
+	public Image getBackgroundImage() { return img; }
 	
 	/**
 	 * Implement the BoardStrategy.

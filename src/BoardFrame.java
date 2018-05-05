@@ -187,15 +187,11 @@ public class BoardFrame extends JFrame {
 		setSize(1000,700);
 		setTitle("Mancala");
 		setLayout(new BorderLayout());
-//---------------------------------------------------------------------		
 	
-		//create label to hold background for entire frame and use strategy's background image	
-		JLabel background = new JLabel(new ImageIcon(strategy.setBackgroundImage()));
-		background.setLayout(new FlowLayout());
+		//load background image from files and set to this frame
+		Image img = strategy.getBackgroundImage();
+		getContentPane().add(new BackgroundPanel(img));
 		
-		//add background image to the main game frame
-		add(background);
-	
 		//create undoPanel to hold the undo button
 		JPanel undoPanel = new JPanel();
 		undoPanel.setLayout(new FlowLayout());
@@ -206,8 +202,7 @@ public class BoardFrame extends JFrame {
 		undoPanel.add(undoButton, BorderLayout.NORTH);
 		
 		//add undoPanel to NORTH side of the backgroundImg label
-		background.add(undoPanel);
-		
+		add(undoPanel, BorderLayout.NORTH);
 		
 		//create panel to hold all pits, 12 in total
 		JPanel pitsPanel = new JPanel();
@@ -217,14 +212,33 @@ public class BoardFrame extends JFrame {
 		for(int i = 0; i < 12; i++)
 		{
 			JButton pit = new JButton();
-			pit.setPreferredSize(new Dimension(100,100));
+			pit.setPreferredSize(new Dimension(50,50));
 			strategy.setBackgroundColor(pit);
 			strategy.addStone(pit, board.getNumOfStones());
 			pitsPanel.add(pit);
 		}
 		
 		//add pitsPanel to CENTER of background JLabel
-		background.add(pitsPanel, BorderLayout.CENTER);
+		add(pitsPanel, BorderLayout.CENTER);
+		
+		//create east side mancala pit
+		JPanel eastMancala = new BackgroundPanel(img);
+		JButton mancalaA = new JButton();
+		mancalaA.setEnabled(false);
+		mancalaA.setPreferredSize(new Dimension(200, 300));
+		mancalaA.setBackground(Color.LIGHT_GRAY);
+		eastMancala.add(mancalaA);
+		
+		//create west side mancala pit
+		JPanel westMancala = new BackgroundPanel(img);
+		JButton mancalaB = new JButton();
+		mancalaB.setEnabled(false);
+		mancalaB.setPreferredSize(new Dimension(200, 300));
+		mancalaB.setBackground(Color.LIGHT_GRAY);
+		westMancala.add(mancalaB);
+		
+		add(westMancala, BorderLayout.WEST);
+		add(eastMancala, BorderLayout.EAST);
 //---------------------------------------------------------------------------		
 		
 		setVisible(true);

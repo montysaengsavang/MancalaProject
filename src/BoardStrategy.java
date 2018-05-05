@@ -21,7 +21,7 @@ public interface BoardStrategy {
 	 * Get the background image.
 	 * @return the background image.
 	 */
-	public Image setBackgroundImage();
+	public Image getBackgroundImage();
 	
 	/**
 	 * Set the panel's background colors.
