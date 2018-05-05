@@ -9,11 +9,21 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class BoardFrame extends JFrame {
+
+
+public class BoardFrame extends JFrame implements ChangeListener{
 
 	public Board board;
-
+	private JButton pitsButtonsA[] = new JButton[7];
+	private JButton pitsButtonsB[] = new JButton[7];
+	private JButton mancalaA;
+	private JButton mancalaB;
+	private BoardStrategy strategy;
+	private JLabel turnLabel;
+	
 	// constructor
 	public BoardFrame() {
 		JFrame setupFrame = new JFrame();
@@ -147,10 +157,10 @@ public class BoardFrame extends JFrame {
 
 					// create a theme strategy, given rainbow theme and image
 					// associated
-					BoardStrategy strategy = new RainbowTheme(img);
+					strategy = new RainbowTheme(img);
 
 					// call game frame method to create frame using this theme
-					gameFrame(strategy);
+					gameFrame();
 				} else // else send Christmas theme
 				{
 					// gameFrame();
@@ -163,10 +173,10 @@ public class BoardFrame extends JFrame {
 					}
 					// create a theme strategy, given christmas theme and image
 					// associated
-					BoardStrategy strat = new ChristmasTheme(img);
+					strategy = new ChristmasTheme(img);
 
 					// call game frame method to create frame using this theme
-					gameFrame(strat);
+					gameFrame();
 				}
 			}
 		});
@@ -195,12 +205,16 @@ public class BoardFrame extends JFrame {
 		sFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	
 	// function for drawing out the game frame, automatically called by
 	// setupFrame
-	public void gameFrame(BoardStrategy strategy) {
-		setSize(1150, 700);
+	public void gameFrame() {
+		setSize(1150, 640);
 		setTitle("Mancala");
 		setLayout(new BorderLayout());
+		
+		//attach model
+		board.attach(this);
 
 		// load background image from files and set to this frame
 		Image img = strategy.getBackgroundImage();
@@ -218,14 +232,11 @@ public class BoardFrame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{	
-				//change the model
+				//change the model, stateChanged will be called automatically
 				board.undo();
 				
 				board.display();
 				System.out.println();
-				
-				//update the view
-				
 			}
 		});
 		undoPanel.add(undoButton, BorderLayout.NORTH);
@@ -245,52 +256,50 @@ public class BoardFrame extends JFrame {
 		
 		//create first row of pits B6-B1
 		for (int i = 6; i >= 1; i--) {
-			JButton pit = new JButton();
-			strategy.setBackgroundColor(pit);
-			pit.setPreferredSize(new Dimension(100,100));
-			strategy.addStone(pit, board.getNumOfStones());
+			pitsButtonsB[i] = new JButton();
+			strategy.setBackgroundColor(pitsButtonsB[i]);
+			pitsButtonsB[i].setPreferredSize(new Dimension(100,100));
+			strategy.addStone(pitsButtonsB[i], board.getNumOfStones());
 			
 			final int index = i;
-			pit.addActionListener(new ActionListener()
+			pitsButtonsB[i].addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					//change the model
+					//change the model, stateChanged will be called automatically
 					board.select("B" + index);
 					
 					board.display();
 					System.out.println();
-					
-					//update the view
+		
 				}
 			});
 			
-			pitsPanel.add(pit);
+			pitsPanel.add(pitsButtonsB[i]);
 		}
 		
 		//create second row of pits A1-A6
 		for (int i = 1; i <= 6; i++) {
-			JButton pit = new JButton();
-			strategy.setBackgroundColor(pit);
-			pit.setPreferredSize(new Dimension(100,100));
-			strategy.addStone(pit, board.getNumOfStones());
+			pitsButtonsA[i] = new JButton();
+			strategy.setBackgroundColor(pitsButtonsA[i]);
+			pitsButtonsA[i].setPreferredSize(new Dimension(100,100));
+			strategy.addStone(pitsButtonsA[i], board.getNumOfStones());
 			
 			final int index = i;
-			pit.addActionListener(new ActionListener()
+			pitsButtonsA[i].addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					//change the model
+					//change the model, stateChanged will be called automatically
 					board.select("A" + index);
 					
 					board.display();
 					System.out.println();
 					
-					//update the view
 				}
 			});
 			
-			pitsPanel.add(pit);
+			pitsPanel.add(pitsButtonsA[i]);
 		}
 		
 		//fills in bottom row of pits panel to shape pits into squares
@@ -304,14 +313,14 @@ public class BoardFrame extends JFrame {
 
 		// create east side mancala pit
 		BackgroundPanel eastMancala = new BackgroundPanel(img);
-		JButton mancalaA = new JButton();
+		mancalaA = new JButton();
 		mancalaA.setEnabled(false);
-		mancalaA.setPreferredSize(new Dimension(150, 265));
+		mancalaA.setPreferredSize(new Dimension(120, 235));
 		mancalaA.setBackground(Color.LIGHT_GRAY);
 
 		JLabel eastName = new JLabel(" " + board.getPlayerAsName() + " ");
-		eastName.setForeground(Color.BLACK);
-		eastName.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		eastName.setForeground(Color.WHITE);
+		eastName.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		// put east mancala in correct position
 		eastMancala.setLayout(new GridBagLayout());
@@ -320,15 +329,15 @@ public class BoardFrame extends JFrame {
 		
 		// create west side mancala pit
 		JPanel westMancala = new BackgroundPanel(img);
-		JButton mancalaB = new JButton();
+		mancalaB = new JButton();
 		mancalaB.setEnabled(false);
-		mancalaB.setPreferredSize(new Dimension(150, 265));
+		mancalaB.setPreferredSize(new Dimension(120, 235));
 		mancalaB.setBackground(Color.LIGHT_GRAY);
 
 		//create label for player name
 		JLabel westName = new JLabel(" " + board.getPlayerBsName() + " ");
-		westName.setForeground(Color.BLACK);
-		westName.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		westName.setForeground(Color.WHITE);
+		westName.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		// put west mancala in correct position and add name of player
 		westMancala.setLayout(new GridBagLayout());
@@ -340,15 +349,12 @@ public class BoardFrame extends JFrame {
 
 		// create panel for prompting whos turn it is
 		JPanel turnPanel = new JPanel();
-		JLabel turnLabel = new JLabel();
+		turnLabel = new JLabel();
 		
-		String playerName = "";
-		if(board.getTurn().equals("A"))
-			playerName = board.getPlayerAsName();
-		else
-			playerName = board.getPlayerBsName();
-			
+		String playerName = board.getPlayerAsName();
+	
 		turnLabel.setText(playerName + "'s Turn");
+		turnLabel.setForeground(Color.WHITE);
 		turnLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		turnPanel.add(turnLabel);
 
@@ -358,6 +364,70 @@ public class BoardFrame extends JFrame {
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		// TODO Auto-generated method stub
+	
+		//iterate 1 - 13
+		for(int i = 1; i <= board.pits.size(); i++)
+		{
+			//all conditions that will copy the model into the view
+			if(i == 7)
+				strategy.addStone(mancalaA, board.pits.get(6).getStones());
+			
+			else if(i == 14)
+				strategy.addStone(mancalaB, board.pits.get(13).getStones());
+			
+			else if(i <= 6)
+				strategy.addStone(pitsButtonsA[i], board.pits.get(i-1).getStones());
+			
+			else if(i >= 8)	
+				strategy.addStone(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
+		}
+		
+		//get players turn and update view
+		String playerName = "";
+		if(board.getTurn().equals("A"))
+			playerName = board.getPlayerAsName();
+		else
+			playerName = board.getPlayerBsName();
+		turnLabel.setText(playerName + "'s Turn");
+		
+		
+		if(board.checkEnd())
+		{
+			//calculate the total in the pits
+			board.calculateTotal();
+			
+			//update the view with data from model
+			for(int i = 1; i <= board.pits.size(); i++)
+			{
+				//all conditions that will copy the model into the view
+				if(i == 7)
+					strategy.addStone(mancalaA, board.pits.get(6).getStones());
+				
+				else if(i == 14)
+					strategy.addStone(mancalaB, board.pits.get(13).getStones());
+				
+				else if(i <= 6)
+					strategy.addStone(pitsButtonsA[i], board.pits.get(i-1).getStones());
+				
+				else if(i >= 8)	
+					strategy.addStone(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
+			}
+			
+			//get winner, A or B, change label to show winner
+			String winner = board.getWinner();
+			if(winner.equals("A"))
+				turnLabel.setText(board.getPlayerAsName() + " Wins!");
+			else
+				turnLabel.setText(board.getPlayerBsName() + " Wins!");
+		}
+		
+		repaint();
+		
 	}
 
 }

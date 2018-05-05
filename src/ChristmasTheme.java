@@ -31,7 +31,7 @@ public class ChristmasTheme implements BoardStrategy
    @Override
    public void setBackgroundColor (JButton button) 
    {
-      button.setBackground (Color.WHITE);
+      button.setBackground (Color.LIGHT_GRAY);
    }
    
    /**
@@ -63,7 +63,7 @@ public class ChristmasTheme implements BoardStrategy
    @Override
    public void setPanelColor (JPanel south, JPanel north)
    {
-      north.setBackground (new Color (127, 0, 0));
+      north.setBackground (new Color (170, 0, 0));
       south.setBackground (new Color (0, 51, 0));
    }
    

@@ -2,15 +2,19 @@
 
 import java.util.*;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 public class Board {
 
-	ArrayList<Pit> pits = new ArrayList<Pit>(); // list of pits on board
-	ArrayList<Pit> state;
+	public ArrayList<Pit> pits = new ArrayList<Pit>(); // list of pits on board
+	public ArrayList<Pit> state;
 	public String turnState;
 	public String turn; // determines who's turn it currently is
 	private String playerAsName;
 	private String playerBsName;
 	private int numOfStones;
+	private ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>();
 	
 	/**
 	 * Ctor for the board, will also create a save state
@@ -62,6 +66,11 @@ public class Board {
 	public void undo() {
 		pits = state;
 		turn = turnState;
+		
+		//notify listener
+		ChangeEvent e = new ChangeEvent(this);
+		for(ChangeListener l:listeners)
+			l.stateChanged(e);
 	}
 	
 	/**
@@ -136,9 +145,9 @@ public class Board {
 	 */
 	public String getWinner(){
 		if(pits.get(6).getStones() > pits.get(13).getStones())
-			return "Player 1 wins";
+			return "A";
 		else if(pits.get(6).getStones() < pits.get(13).getStones())
-			return "Player 2 wins";
+			return "B";
 		else
 			return "Tie";
 	}
@@ -205,6 +214,11 @@ public class Board {
 			if(!bonusTurn)
 				nextTurn(); // changes turn if there's no bonus turn
 		}
+		
+		//notify listener
+		ChangeEvent e = new ChangeEvent(this);
+		for(ChangeListener l:listeners)
+			l.stateChanged(e);
 	}
 	
 	// changes the turn, A = player 1, B = player 2
@@ -214,6 +228,9 @@ public class Board {
 		else
 			turn = "A";
 	}
+	
+	//attach method for listeners
+	public void attach(ChangeListener l) {listeners.add(l);}
 	
 	//getter for the turn
 	public String getTurn() {return turn;}

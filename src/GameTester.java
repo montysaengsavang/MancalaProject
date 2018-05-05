@@ -7,6 +7,7 @@ public class GameTester {
 
 		
 	    BoardFrame gameFrame = new BoardFrame();
+	    
 	/*	
 		Scanner in = new Scanner(System.in);
 		System.out.println("How many initial stones?");
