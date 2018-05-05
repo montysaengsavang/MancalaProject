@@ -82,7 +82,13 @@ public class ChristmasStone implements Icon
             case 2:
                g2.setColor(cYellow);
                break;
+            
+            default:
+               System.out.println("Error in ChristmasStone color mutator and renderer switch case statement");
+               break;
          }
+         
+         g2.fill(new Ellipse2D.Double(width, height, WID, WID));
       }
    }
 }
