@@ -15,24 +15,33 @@ import javax.swing.Icon;
 public class RainbowStone implements Icon {
 	// Instance variables
 	private int totalStones;
-	private static final int pitWidth = 72;
+	private static final int WIDTH = 80;
 	/**
 	 * Constructor 
 	 * @param stones is the amount of the stones to start with the game.
 	 */
-	public RainbowStone(int stones) { totalStones = stones; }
+	public RainbowStone(int stones) 
+	{ 
+		totalStones = stones; 
+	}
 
 	/**
 	 * Return the stone icon height.
 	 */
 	@Override
-	public int getIconHeight() { return 0; }
+	public int getIconHeight() 
+	{ 
+		return 0; 
+	}
 
 	/**
 	 * Return the stone icon width.
 	 */
 	@Override
-	public int getIconWidth() { return 0; }
+	public int getIconWidth() 
+	{ 
+		return 0;
+	}
 
 	/**
 	 * Paint the stone icon.
@@ -41,14 +50,15 @@ public class RainbowStone implements Icon {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 	  Graphics2D g2 = (Graphics2D) g;
 	
-	  // Places white stones into pits
+	  // Places stones into pits
 	  for (int i = 0; i < totalStones; i++) {
 		int height = 0, width = i*18;
 		  
-		// Stack the stones to the next row if there are more than 4 stones in the pit.
-		while (width >= pitWidth) {
-		  height += 20;
-		  width -= pitWidth;
+		// Stack the stones to the next row
+		while (width >= WIDTH) 
+		{
+		  height = height + 20;
+		  width = width - WIDTH;
 		}
 		
 		

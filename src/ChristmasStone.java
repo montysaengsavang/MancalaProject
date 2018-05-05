@@ -15,7 +15,7 @@ import javax.swing.Icon;
 public class ChristmasStone implements Icon
 {
    private int totalStones; // total number of stones in the pit
-   private static final int pitWidth = 72; //standard pit width
+   private static final int WIDTH = 80; //standard pit width
    
    /**
     * Constructor 
@@ -65,9 +65,10 @@ public class ChristmasStone implements Icon
          int width = i * WID;
       
          
-         while (width >= pitWidth) {
-            height += 20;
-            width -= pitWidth;
+         while (width >= WIDTH)
+         {
+            height = height + 20;
+            width = width - WIDTH;
          }
          
          g2.setColor (cRed);
