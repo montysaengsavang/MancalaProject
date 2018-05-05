@@ -6,6 +6,12 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.Icon;
 
+/**
+ * This class deals with rendering and coloring the stones in the pits with the colors as appropriate to the theme.
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
+
 public class ChristmasStone implements Icon
 {
    private int totalStones; // total number of stones in the pit

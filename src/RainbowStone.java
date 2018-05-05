@@ -6,11 +6,16 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.Icon;
 
+/**
+ * This class deals with rendering and coloring the stones in the pits with the colors as appropriate to the theme.
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
 
 public class RainbowStone implements Icon {
 	// Instance variables
 	private int totalStones;
-	private int widthOfPit = 90;
+	private static final int pitWidth = 72;
 	/**
 	 * Constructor 
 	 * @param stones is the amount of the stones to start with the game.
@@ -36,34 +41,33 @@ public class RainbowStone implements Icon {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 	  Graphics2D g2 = (Graphics2D) g;
 	
-	  // Places stones into pit in a row
+	  // Places white stones into pits
 	  for (int i = 0; i < totalStones; i++) {
 		int height = 0, width = i*18;
 		  
-		// Start the stones on next row 
-		while (width >= widthOfPit) {
-		  //moves down
-		  height = height + 20;
-		  
-		  //reset width to the beginning
-		  width = width - widthOfPit;
+		// Stack the stones to the next row if there are more than 4 stones in the pit.
+		while (width >= pitWidth) {
+		  height += 20;
+		  width -= pitWidth;
 		}
 		
 		
-		if(i % 6 == 0)
-			g2.setColor(Color.RED);
-		else if(i % 6 == 1)
+		g2.setColor(Color.RED);
+		g2.draw(new Ellipse2D.Double(width, height, 18, 18));
+		
+		if(i % 6 == 1)
 			g2.setColor(Color.ORANGE);
 		else if(i % 6 == 2)
-			g2.setColor(Color.GREEN);
+			g2.setColor(Color.PINK);
 		else if(i % 6 == 3)
-			g2.setColor(Color.YELLOW);
+			g2.setColor(Color.GREEN);
 		else if(i % 6 == 4)
-			g2.setColor(Color.MAGENTA);
-		else if(i % 6 == 5)
 			g2.setColor(Color.BLUE);
+		else if(i % 6 == 5)
+			g2.setColor(Color.YELLOW);
+		else if(i % 6 == 0)
+			g2.setColor(Color.MAGENTA);
 		
-		//create and paint stone
 		g2.fill(new Ellipse2D.Double(width, height, 18, 18));
 	  }
 	}

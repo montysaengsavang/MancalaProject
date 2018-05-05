@@ -3,6 +3,11 @@ import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * This class deals with rendering and coloring the Background and pits with the colors as appropriate to the theme
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
 
 public class ChristmasTheme implements BoardStrategy
 {

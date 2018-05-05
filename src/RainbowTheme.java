@@ -4,6 +4,12 @@ import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * This class deals with rendering and coloring the Background and pits with the colors as appropriate to the theme
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
+
 public class RainbowTheme implements BoardStrategy {
 	/**
 	 * Constructor
@@ -42,8 +48,8 @@ public class RainbowTheme implements BoardStrategy {
 	 */
 	@Override
 	public void setPanelColor(JPanel south, JPanel north) {
-		south.setBackground(Color.PINK);
-		north.setBackground(Color.ORANGE);
+		south.setBackground(Color.RED);
+		north.setBackground(Color.GREEN);
 	}
 	
 	// Instance variable
