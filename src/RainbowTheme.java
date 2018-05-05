@@ -42,8 +42,8 @@ public class RainbowTheme implements BoardStrategy {
 	 */
 	@Override
 	public void setPanelColor(JPanel south, JPanel north) {
-		south.setBackground(Color.RED);
-		north.setBackground(Color.GREEN);
+		south.setBackground(Color.PINK);
+		north.setBackground(Color.ORANGE);
 	}
 	
 	// Instance variable
