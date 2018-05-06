@@ -1,10 +1,15 @@
-
-
 import java.util.*;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * @author Harry Tran
+ * @author Monty Saengsavang
+ * @author Shahbaz Singh Mansahia
+ * @version final
+ * Controller class, uses Pit class as model and is attacted to the view
+ * 
+ */
 public class Board {
 
 	public ArrayList<Pit> pits = new ArrayList<Pit>(); // list of pits on board
