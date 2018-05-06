@@ -438,8 +438,10 @@ public class BoardFrame extends JFrame implements ChangeListener{
 			String winner = board.getWinner();
 			if(winner.equals("A"))
 				turnLabel.setText(board.getPlayerAsName() + " Wins!");
-			else
+			else if(winner.equals("B"))
 				turnLabel.setText(board.getPlayerBsName() + " Wins!");
+			else
+				turnLabel.setText("Tie!");
 		}
 		
 		repaint();
