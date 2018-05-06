@@ -9,8 +9,10 @@ import javax.swing.JPanel;
  * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
  *
  */
-
 public class RainbowTheme implements BoardStrategy {
+	
+	private Image img;
+
 	/**
 	 * Constructor
 	 * @param aImage is the background image
@@ -18,8 +20,7 @@ public class RainbowTheme implements BoardStrategy {
 	public RainbowTheme (Image aImage){ img = aImage; }
 	
 	/**
-	 * Implement the BoardStrategy.
-	 * Set the button background color.
+	 * Set the Jbuttons background color.
 	 */
 	@Override
 	public void setBackgroundColor(JButton button) {
@@ -27,8 +28,7 @@ public class RainbowTheme implements BoardStrategy {
 	}
 	
 	/**
-	 * Implement the BoardStrategy.
-	 * Add the stones into the pit.
+	 * Add the stones into the pit, which is a JButton
 	 */
 	@Override
 	public void addStone(JButton button, int totalStones) {
@@ -36,15 +36,15 @@ public class RainbowTheme implements BoardStrategy {
 	}
 	
 	/**
-	 * Implement the BoardStrategy.
-	 * Get the background image.
+	 * @return the background image.
 	 */
 	@Override
 	public Image getBackgroundImage() { return img; }
 	
 	/**
-	 * Implement the BoardStrategy.
-	 * Set the panel color.
+	 * Set the top and bottom Jpanel colors.
+	 * @param south is a JPanel at the bottom of the gameFrame
+	 * @param north is a JPanel at the top of the gameFrame
 	 */
 	@Override
 	public void setPanelColor(JPanel south, JPanel north) {
@@ -52,6 +52,4 @@ public class RainbowTheme implements BoardStrategy {
 		north.setBackground(Color.ORANGE);
 	}
 	
-	// Instance variable
-	private Image img;
 }

@@ -11,11 +11,11 @@ import javax.swing.Icon;
  * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
  *
  */
-
 public class RainbowStone implements Icon {
 	// Instance variables
 	private int totalStones;
 	private static final int WIDTH = 80;
+	
 	/**
 	 * Constructor 
 	 * @param stones is the amount of the stones to start with the game.
@@ -26,7 +26,7 @@ public class RainbowStone implements Icon {
 	}
 
 	/**
-	 * Return the stone icon height.
+	 * @return the stone icons height.
 	 */
 	@Override
 	public int getIconHeight() 
@@ -35,7 +35,7 @@ public class RainbowStone implements Icon {
 	}
 
 	/**
-	 * Return the stone icon width.
+	 * @return the stone icons width.
 	 */
 	@Override
 	public int getIconWidth() 
@@ -44,7 +44,11 @@ public class RainbowStone implements Icon {
 	}
 
 	/**
-	 * Paint the stone icon.
+	 * creates a gui of stone icons
+	 * @param c, a component
+	 * @param g, a Graphics object
+	 * @param x,y location
+	 * 
 	 */
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {

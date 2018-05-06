@@ -8,7 +8,6 @@ import javax.swing.JPanel;
  * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
  *
  */
-
 public class ChristmasTheme implements BoardStrategy
 {
    
@@ -16,17 +15,15 @@ public class ChristmasTheme implements BoardStrategy
    
    /**
     * Constructor
-    * @param img  is the image given to the object which is to be assigned as the background image
+    * @param img is the image to be assigned as the background image
     */
-   
    public ChristmasTheme (Image img)
    {
       this.img = img;
    }
    
    /**
-    * Implement the BoardStrategy.
-    * Set the button background Color.
+    * Set the button background Color of Jbuttons
     */
    @Override
    public void setBackgroundColor (JButton button) 
@@ -35,10 +32,8 @@ public class ChristmasTheme implements BoardStrategy
    }
    
    /**
-    * Implement the BoardStrategy.
-    * Add the stones to the pit.
+    * Add the stones to the pits, which are Jbuttons
     */
-   
    @Override
    public void addStone (JButton button, int totalStones) 
    {
@@ -46,8 +41,8 @@ public class ChristmasTheme implements BoardStrategy
    }
    
    /**
-    * Implement the BoardStrategy.
-    * Get the Background Image.
+    * Returns the background image
+    * @return img, the background image
     */
    
    @Override
@@ -57,8 +52,9 @@ public class ChristmasTheme implements BoardStrategy
    }
    
    /**
-    * Implement the BoardStrategy
-    * Set the Panel colors.
+    * Sets the colors of the top and bottom JPanels
+    * @param south is the bottom panel of the gameFrame
+    * @param north is the top panel of the gameFrame
     */
    @Override
    public void setPanelColor (JPanel south, JPanel north)

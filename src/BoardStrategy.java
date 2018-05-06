@@ -3,30 +3,36 @@ import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * This interface creates a layout for the functions needed to implement a theme
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
 public interface BoardStrategy {
+	
 	/**
-	 * Set color of buttons
+	 * Sets color of buttons
 	 * @param button
 	 */
 	public void setBackgroundColor(JButton button);
 	
 	/**
-	 * Add stone icons to buttons
+	 * Adds stone icons to Jbuttons
 	 * @param buttons
 	 * @param totalStones
 	 */
 	public void addStone(JButton buttons, int totalStones);
 	
 	/**
-	 * Get the background image.
+	 * Returns the background image.
 	 * @return the background image.
 	 */
 	public Image getBackgroundImage();
 	
 	/**
-	 * Set the panel's background colors.
-	 * @param south is the south panel display the players' turns.
-	 * @param north is the north panel display the undo button.
+	 * Set the top and bottom color of panels of the board frame
+	 * @param south is the bottom panel
+	 * @param north is the top panel 
 	 */
 	public void setPanelColor (JPanel south, JPanel north);
 }

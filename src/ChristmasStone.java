@@ -38,7 +38,6 @@ public class ChristmasStone implements Icon
    /**
     * Return the stone icon Width
     */
-   
    @Override
    public int getIconWidth()
    {
@@ -46,7 +45,10 @@ public class ChristmasStone implements Icon
    }
    
    /**
-    * Paint the stone icon
+    * Paint the stone icon with different colors each stone
+    * @param c, Component
+    * @param g, Graphics object
+    * @param x,y location
     */
    @Override
    public void paintIcon (Component c, Graphics g, int x, int y)

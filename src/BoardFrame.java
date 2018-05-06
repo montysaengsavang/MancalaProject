@@ -1,4 +1,4 @@
-//comment
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-
+/**
+ * This class creates the setupFrame and calls the gameFrame
+ * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
+ *
+ */
 public class BoardFrame extends JFrame implements ChangeListener{
 
 	public Board board;
@@ -24,13 +28,20 @@ public class BoardFrame extends JFrame implements ChangeListener{
 	private BoardStrategy strategy;
 	private JLabel turnLabel;
 	
-	// constructor
+	/**
+	 * Constructor to intialize the board, call setupFrame first
+	 *
+	 */
 	public BoardFrame() {
 		JFrame setupFrame = new JFrame();
 		setupFrame(setupFrame);
 	}
 
-	// frame for setting up the mancala game, how many stones?
+	
+	/**
+	 * Frame to ask player the setup options, (eg. # of stones)
+	 * @param sFrame is the setup frame created specifically for displaying set up options
+	 */
 	public void setupFrame(JFrame sFrame) {
 		// set size of the setup frame with a title
 		sFrame.setSize(400, 285);
@@ -206,8 +217,11 @@ public class BoardFrame extends JFrame implements ChangeListener{
 	}
 
 	
-	// function for drawing out the game frame, automatically called by
-	// setupFrame
+	/**
+	 * Automatically called by setupFrame, gameFrame creates the mancala board
+	 * and initializes all pits and prompts for the players
+	 *
+	 */
 	public void gameFrame() {
 		setSize(1150, 640);
 		setTitle("Mancala");
@@ -366,8 +380,11 @@ public class BoardFrame extends JFrame implements ChangeListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	@Override
-	public void stateChanged(ChangeEvent arg0) {
+	/**
+	 * stateChanged is called when a change in the model happens, the view is updated and repainted
+	 * @param ChangeEvent e is an event object
+	 */
+	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 	
 		//iterate 1 - 13
