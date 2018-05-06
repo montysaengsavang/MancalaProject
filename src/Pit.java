@@ -1,5 +1,11 @@
 
-
+/**
+ * @author Harry Tran
+ * @author Monty Saengsavang
+ * @author Shahbaz Singh Mansahia
+ * @version final
+ * Model class for the pits on the mancala board
+ */
 public class Pit {
 
 	private String ID; // Identifies the pit, i.e A1, B5, AP, etc...
