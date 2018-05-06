@@ -12,34 +12,33 @@ import javax.swing.JPanel;
 public class RainbowTheme implements BoardStrategy {
 	
 	private Image img;
-
+	
 	/**
 	 * Constructor
 	 * @param aImage is the background image
 	 */
-	public RainbowTheme (Image aImage){ img = aImage; }
-	
-	/**
-	 * Set the Jbuttons background color.
-	 */
-	@Override
-	public void setBackgroundColor(JButton button) {
-		button.setBackground(Color.LIGHT_GRAY);	
-	}
-	
-	/**
-	 * Add the stones into the pit, which is a JButton
-	 */
-	@Override
-	public void addStone(JButton button, int totalStones) {
-		button.setIcon(new RainbowStone(totalStones));
+	public RainbowTheme (Image image)
+	{ 
+		img = image; 
 	}
 	
 	/**
 	 * @return the background image.
 	 */
 	@Override
-	public Image getBackgroundImage() { return img; }
+	public Image getImage() 
+	{ 
+		return img; 
+	}
+	
+	
+	/**
+	 * Add the stones into the pit, which is a JButton
+	 */
+	@Override
+	public void addToPit(JButton button, int numOfStones) {
+		button.setIcon(new RainbowStone(numOfStones));
+	}
 	
 	/**
 	 * Set the top and bottom Jpanel colors.
@@ -47,9 +46,18 @@ public class RainbowTheme implements BoardStrategy {
 	 * @param north is a JPanel at the top of the gameFrame
 	 */
 	@Override
-	public void setPanelColor(JPanel south, JPanel north) {
-		south.setBackground(Color.RED);
-		north.setBackground(Color.ORANGE);
+	public void changeBorderPanelColor(JPanel top, JPanel bottom) {
+		top.setBackground(Color.ORANGE);
+		bottom.setBackground(Color.RED);
 	}
+	
+	/**
+	 * Set the Jbuttons background color.
+	 */
+	@Override
+	public void changeButtonColor(JButton button) {
+		button.setBackground(Color.LIGHT_GRAY);	
+	}
+
 	
 }

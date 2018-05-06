@@ -23,10 +23,21 @@ public class ChristmasTheme implements BoardStrategy
    }
    
    /**
+    * Returns the background image
+    * @return img, the background image
+    */
+   @Override
+   public Image getImage() 
+   {
+      return img;
+   }
+   
+   
+   /**
     * Set the button background Color of Jbuttons
     */
    @Override
-   public void setBackgroundColor (JButton button) 
+   public void changeButtonColor (JButton button) 
    {
       button.setBackground (Color.LIGHT_GRAY);
    }
@@ -35,21 +46,11 @@ public class ChristmasTheme implements BoardStrategy
     * Add the stones to the pits, which are Jbuttons
     */
    @Override
-   public void addStone (JButton button, int totalStones) 
+   public void addToPit(JButton button, int numOfStones) 
    {
-      button.setIcon(new ChristmasStone(totalStones));
+      button.setIcon(new ChristmasStone(numOfStones));
    }
-   
-   /**
-    * Returns the background image
-    * @return img, the background image
-    */
-   
-   @Override
-   public Image getBackgroundImage () 
-   {
-      return img;
-   }
+  
    
    /**
     * Sets the colors of the top and bottom JPanels
@@ -57,10 +58,10 @@ public class ChristmasTheme implements BoardStrategy
     * @param north is the top panel of the gameFrame
     */
    @Override
-   public void setPanelColor (JPanel south, JPanel north)
+   public void changeBorderPanelColor (JPanel top, JPanel bottom)
    {
-      north.setBackground (new Color (170, 0, 0));
-      south.setBackground (new Color (0, 51, 0));
+      top.setBackground (new Color (170, 0, 0));
+      bottom.setBackground (new Color (0, 51, 0));
    }
    
 }

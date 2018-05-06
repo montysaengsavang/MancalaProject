@@ -231,7 +231,7 @@ public class BoardFrame extends JFrame implements ChangeListener{
 		board.attach(this);
 
 		// load background image from files and set to this frame
-		Image img = strategy.getBackgroundImage();
+		Image img = strategy.getImage();
 		getContentPane().add(new BackgroundPanel(img));
 
 		// create undoPanel to hold the undo button
@@ -271,9 +271,9 @@ public class BoardFrame extends JFrame implements ChangeListener{
 		//create first row of pits B6-B1
 		for (int i = 6; i >= 1; i--) {
 			pitsButtonsB[i] = new JButton();
-			strategy.setBackgroundColor(pitsButtonsB[i]);
+			strategy.changeButtonColor(pitsButtonsB[i]);
 			pitsButtonsB[i].setPreferredSize(new Dimension(100,100));
-			strategy.addStone(pitsButtonsB[i], board.getNumOfStones());
+			strategy.addToPit(pitsButtonsB[i], board.getNumOfStones());
 			
 			final int index = i;
 			pitsButtonsB[i].addActionListener(new ActionListener()
@@ -295,9 +295,9 @@ public class BoardFrame extends JFrame implements ChangeListener{
 		//create second row of pits A1-A6
 		for (int i = 1; i <= 6; i++) {
 			pitsButtonsA[i] = new JButton();
-			strategy.setBackgroundColor(pitsButtonsA[i]);
+			strategy.changeButtonColor(pitsButtonsA[i]);
 			pitsButtonsA[i].setPreferredSize(new Dimension(100,100));
-			strategy.addStone(pitsButtonsA[i], board.getNumOfStones());
+			strategy.addToPit(pitsButtonsA[i], board.getNumOfStones());
 			
 			final int index = i;
 			pitsButtonsA[i].addActionListener(new ActionListener()
@@ -374,7 +374,7 @@ public class BoardFrame extends JFrame implements ChangeListener{
 
 		add(turnPanel, BorderLayout.SOUTH);
 		
-		strategy.setPanelColor(turnPanel, undoPanel);
+		strategy.changeBorderPanelColor(undoPanel, turnPanel);
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -385,23 +385,22 @@ public class BoardFrame extends JFrame implements ChangeListener{
 	 * @param ChangeEvent e is an event object
 	 */
 	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
 	
 		//iterate 1 - 13
 		for(int i = 1; i <= board.pits.size(); i++)
 		{
 			//all conditions that will copy the model into the view
 			if(i == 7)
-				strategy.addStone(mancalaA, board.pits.get(6).getStones());
+				strategy.addToPit(mancalaA, board.pits.get(6).getStones());
 			
 			else if(i == 14)
-				strategy.addStone(mancalaB, board.pits.get(13).getStones());
+				strategy.addToPit(mancalaB, board.pits.get(13).getStones());
 			
 			else if(i <= 6)
-				strategy.addStone(pitsButtonsA[i], board.pits.get(i-1).getStones());
+				strategy.addToPit(pitsButtonsA[i], board.pits.get(i-1).getStones());
 			
 			else if(i >= 8)	
-				strategy.addStone(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
+				strategy.addToPit(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
 		}
 		
 		//get players turn and update view
@@ -423,16 +422,16 @@ public class BoardFrame extends JFrame implements ChangeListener{
 			{
 				//all conditions that will copy the model into the view
 				if(i == 7)
-					strategy.addStone(mancalaA, board.pits.get(6).getStones());
+					strategy.addToPit(mancalaA, board.pits.get(6).getStones());
 				
 				else if(i == 14)
-					strategy.addStone(mancalaB, board.pits.get(13).getStones());
+					strategy.addToPit(mancalaB, board.pits.get(13).getStones());
 				
 				else if(i <= 6)
-					strategy.addStone(pitsButtonsA[i], board.pits.get(i-1).getStones());
+					strategy.addToPit(pitsButtonsA[i], board.pits.get(i-1).getStones());
 				
 				else if(i >= 8)	
-					strategy.addStone(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
+					strategy.addToPit(pitsButtonsB[i-7], board.pits.get(i-1).getStones());
 			}
 			
 			//get winner, A or B, change label to show winner

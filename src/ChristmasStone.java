@@ -11,11 +11,9 @@ import javax.swing.Icon;
  * @author Tran, Harry; Mansahia, Shahbaz Singh; Saengsavang, Monty;
  *
  */
-
 public class ChristmasStone implements Icon
 {
-   private int totalStones; // total number of stones in the pit
-   private static final int WIDTH = 80; //standard pit width
+   private int numOfStones; // total number of stones in the pit
    
    /**
     * Constructor 
@@ -23,26 +21,9 @@ public class ChristmasStone implements Icon
     */
    public ChristmasStone (int totalStones) 
    {
-      this.totalStones = totalStones;
+      this.numOfStones = totalStones;
    }
-   
-   /**
-    * Return the stone icon Height
-    */
-   @Override
-   public int getIconHeight () 
-   {
-      return 0;
-   }
-   
-   /**
-    * Return the stone icon Width
-    */
-   @Override
-   public int getIconWidth()
-   {
-      return 0;
-   }
+
    
    /**
     * Paint the stone icon with different colors each stone
@@ -60,21 +41,22 @@ public class ChristmasStone implements Icon
       Color cGreen2 = new Color (102, 178, 102);   //Alternate Christmassy green color
       Color cYellow = new Color (255, 255, 204);   //The color we get from the glow of decorative lights used on Christmas
       
-      final int WID = 18;  
       
-      for (int i = 0; i < totalStones; ++i) {
+      for (int i = 0; i < numOfStones; ++i) 
+      {
+         int stoneWidth = 18;
+         int width = i * stoneWidth; //18 is width of stone
          int height = 0;
-         int width = i * WID;
-      
          
-         while (width >= WIDTH)
+         //while width is greater than the pit width, increase 
+         while(width >= 80) //80 is width of pit
          {
-            height = height + 20;
-            width = width - WIDTH;
+            height = height + 20; //add 20 to height to move down a row
+            width = width - 80; //reset width back to beginning of row
          }
          
          g2.setColor (cRed);
-         g2.draw(new Ellipse2D.Double(width, height, WID, WID));
+         g2.draw(new Ellipse2D.Double(width, height, stoneWidth, stoneWidth));
          
          int n = i % 3;
          
@@ -97,7 +79,25 @@ public class ChristmasStone implements Icon
                break;
          }
          
-         g2.fill(new Ellipse2D.Double(width, height, WID, WID));
+         g2.fill(new Ellipse2D.Double(width, height, stoneWidth, stoneWidth));
       }
+   }
+   
+   /**
+    * Return the stone icon Height
+    */
+   @Override
+   public int getIconHeight () 
+   {
+      return 0;
+   }
+   
+   /**
+    * Return the stone icon Width
+    */
+   @Override
+   public int getIconWidth()
+   {
+      return 0;
    }
 }
